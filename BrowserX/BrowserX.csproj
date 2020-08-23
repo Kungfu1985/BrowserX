@@ -1,0 +1,344 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{43394D51-223C-425B-8BE9-256695564DBD}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BrowserX</RootNamespace>
+    <AssemblyName>BrowserX</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\Browser\icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Accessibility" />
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Microsoft.VisualBasic.Compatibility.Data" />
+    <Reference Include="MiniBlink, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Miniblink\bin\Release\MiniBlink.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mobile" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="WindowsFormsIntegration" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Dropshadow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDownload.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDownload.Designer.cs">
+      <DependentUpon>FormDownload.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormDownloadNew.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDownloadNew.Designer.cs">
+      <DependentUpon>FormDownloadNew.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMain.Designer.cs">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormTestAddressBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormTestAddressBox.Designer.cs">
+      <DependentUpon>FormTestAddressBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IPCChannel\IRemotingObject.cs" />
+    <Compile Include="IPCChannel\PortHelper.cs" />
+    <Compile Include="IPCChannel\RemotingObject.cs" />
+    <Compile Include="IPCChannel\SwapObject.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SkinForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SkinForm.Designer.cs">
+      <DependentUpon>SkinForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC\AddressBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC\AddressBox.Designer.cs">
+      <DependentUpon>AddressBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC\BrowserToolbar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UC\BrowserToolbar.Designer.cs">
+      <DependentUpon>BrowserToolbar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC\BrowserContainer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC\BrowserContainer.Designer.cs">
+      <DependentUpon>BrowserContainer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC\BrowserTabHeader.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC\BrowserTabHeader.Designer.cs">
+      <DependentUpon>BrowserTabHeader.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC\CaptionButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UC\CircleButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC\CircleButton.Designer.cs">
+      <DependentUpon>CircleButton.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC\FolderBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC\FolderBox.designer.cs">
+      <DependentUpon>FolderBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC\IconHelper.cs" />
+    <Compile Include="UC\MenuItemDraw.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UC\myDownloadToolStrip.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UC\myFolderToolStrip.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UC\myListBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UC\myToolStripButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UC\myToolStripRenderer.cs" />
+    <Compile Include="UC\PanelOwner.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UC\PanelLine.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UC\RemoteObject.cs" />
+    <Compile Include="UC\TabHeader.cs" />
+    <Compile Include="UC\Win32API.cs" />
+    <EmbeddedResource Include="FormDownload.resx">
+      <DependentUpon>FormDownload.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormDownloadNew.resx">
+      <DependentUpon>FormDownloadNew.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMain.resx">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormTestAddressBox.resx">
+      <DependentUpon>FormTestAddressBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="SkinForm.resx">
+      <DependentUpon>SkinForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC\AddressBox.resx">
+      <DependentUpon>AddressBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC\BrowserToolbar.resx">
+      <DependentUpon>BrowserToolbar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC\BrowserContainer.resx">
+      <DependentUpon>BrowserContainer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC\BrowserTabHeader.resx">
+      <DependentUpon>BrowserTabHeader.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC\CircleButton.resx">
+      <DependentUpon>CircleButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC\FolderBox.resx">
+      <DependentUpon>FolderBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_normal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close_on.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close_normal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Browser\bcloseitem.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Browser\bcopyitem.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Browser\bfavorites.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Browser\bgoback.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Browser\bgoforward.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Browser\bhome.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Browser\bmenu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Browser\brefresh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Browser\bresume.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Browser\bstop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Browser\bsuspend.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Browser\bundo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Browser\bzoomin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Browser\bzoomout.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Browser\icon.ico" />
+    <Resource Include="Resources\Browser\loadingmask22.png" />
+    <Resource Include="Resources\Browser\light_loading.png" />
+    <Resource Include="Resources\Browser\dark_loading.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Browser\bArrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Browser\bArrowup.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\arrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\clearItem.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Controlbox\close_mask4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Controlbox\max_mask4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Controlbox\min_mask4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Controlbox\res_mask4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\MenuArrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\MenuCheck.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Browser\mnudownload.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Browser\mnufolders.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\download.delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\download.deletehover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Browser\bresumehover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Browser\bsuspendhover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icon_folder.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

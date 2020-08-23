@@ -1,0 +1,125 @@
+
+     C# 基于MiniBlink的多标签浏览器，练手项目
+
+一、现阶段出现的问题                                                                                                                      ---进度---
+
+    1 、   第一个标签页的返回，前进按钮控制不精确，标签选择时按钮是正确的	                     【未解决】
+    2、    工具栏的地址框输入网址后，还未做访问功能					     【已解决】
+    3、    地址框按回车后，会有虚线框（FocusVisualStyle)			                     【已解决】
+    4、    进程激活时，不激活主窗口，	 					     【已解决】
+             子进程中WebBrowser获得焦点时触发OnFocusedChanged回调，在此回调中将主进程窗口
+             激活就可以了。
+    5、    子进程中按下Alt+F4不是关闭主窗口      					     【已解决】
+             屏蔽子进程的Alt+F4功能键关闭窗口，如果进程为Client则主窗口的KeyPreview为True
+             可拦截按键，此时可屏蔽功能键
+二、致命错误，内存泄露...
+	
+    1、   使用双层窗口导致DWM内存一直上涨，                                                                                【已解决】
+	1.1、主窗口使用了透明颜色，导致主窗口非控件区域透明，该颜色为默认值
+	        时不会出现这个问题，但控件层窗口有时会抖动并且有透明块出现（瞬间）
+    2、   两个标签，刷新正常，关闭其中一个刷新，就崩溃                                                                   【未解决】【Otherway】
+	2.1、暂时的解决办法，关闭一个标签时，另一个标签重新加载一遍（不合理）
+                2.2、问题已解决，当前Browser关闭时设置前一个Browser获得消息（设定句柄）
+
+    3、   当前页选中时，如果是加载状态，隐藏刷新按钮，反之隐藏停止按钮			     【已解决】
+三、标题/标签栏BUG
+   
+    1、   双击标题栏窗口最大化，还原时位置不准确                                                              	     【已解决】
+	1.1、问题原因是按下次数为1时，指定了移动窗口标志，所以MouseUp时
+	        虽然是双击，但是依然对移动窗口标志进行了判断，导致还原时移动了
+	        窗口
+    2、  双击标题栏，没有做标签判断，导致双击标签也是最大化                                                          【已解决】
+           增加双击标签关闭关闭功能开关
+    3、  点击标签切换时，一直在添加/移除控件，有轻微闪烁				     【暂未解决】
+    4、  新建标签时，激活了新标签，如果切换到别的标签后，子进程无法知道，会错误将
+           自己显示到别的标签内容之上
+    5、  SetUrlTitle容易崩溃							     【已解决】
+           崩溃的原因是多次获取子进程的状态，子进程多次返回状态，导致主UI卡住
+           解决办法，子进程接收到命令时判断一下是否是给自己的，是给自己的就将命令
+           放入待处理列表
+    6、  鼠标从标签底部快速移出，标签一直处于鼠标悬停状态， 				     【已解决】
+           暂时解决办法，加入MouseLeave检测，鼠标移出时使标签栏重绘 
+           6.1、记录鼠标当前移上去的标签，移出时，只重绘它
+    7、  标签切换，过一段时间不切换，使用IPC通信会有1秒的延时，切换两次
+           就正常了！
+           准备在主进程中发心跳包，广播消息出去，收到的回复一条在线信息
+    8、  可以考虑使用ToolStripDropDown弹出一个panel来做主菜单
+    9、  地址栏没有添加快捷菜单    						     【已解决】
+  10、  标签打开时，如果切换到别的标签，会将后台标签的Url显示到地址栏，判断一下浏览器
+           对象
+  11、  修复地址栏输入时会跳到末尾的BUG, BUG原因：高亮域名后，将选择点设置到了末尾	     【已解决】
+           高亮之前记录光标位置
+  12、  加载地址以及显示Url时没有判断是否是主Frame，导致Url框闪烁跳动显示别的Url
+  13、  地址栏高亮后，撤销功能不正常，暂时未解决此问题
+四、功能增强
+
+    1、   标签栏，鼠标移上去，提示信息， 标签鼠标移上去的高亮状态			     【已解决】
+    2、   地址栏菜单样式改成WebBrowser一致外观,使用WPF菜单样式			     【已解决】【已废弃】
+    3、   网址输入栏修改为AddressBox的自定义控件，不使用WPF的自定义控件	 	     【已解决】
+    4、   标签加上右键菜单	
+五、描述性错误
+    1、   如果当前删除的标签的浏览器控件不为“这人”，手动释放资源销毁对象 		     【已解决】
+
+
+六、关闭同名进程
+	taskkill /f /im qq.exe
+	taskkill /f /im QQprotect.exe
+
+七、序列化传输图片
+    1、  解决传输网站小图标时提示 远程处理错误在“system.drawing.image"上未找到”nativeimage"
+           因为Net Remoting时传输的对象必须可以序列化，所以将图片转换为Base编码传输，接收到后
+           再从Base64解码成Arrary数组，再转换为Image，Bitmap对象
+	public Bitmap img;
+
+	public String ImageToString(Bitmap img)
+	{
+	    byte[] byteArray = new byte[0];
+	    using (MemoryStream stream = new MemoryStream())
+	    {
+	        img.Save(stream, System.Drawing.Imaging.ImageFormat.Png);
+	        stream.Close();
+	        byteArray = stream.ToArray();
+	    }
+	    return Convert.ToBase64String(byteArray);
+	}
+	At the client side:
+
+	public Bitmap img;
+
+	public Bitmap StringToImage(string imageString)
+	{
+	    if (imageString == null) throw new ArgumentNullException("imageString");
+	    byte[] array = Convert.FromBase64String(imageString);
+	    Bitmap image = (Bitmap)Bitmap.FromStream(new MemoryStream(array));
+	    return image;
+	}
+
+
+
+		protected override void OnLostFocus(EventArgs e)
+		{
+			if (!mIgnoreLostFocus)
+			{
+				HideAutoCompleteForm();
+			}
+			base.OnLostFocus (e);
+		}
+——————————————————————————————————————————————————
+问题：在C#中使用toolstrip时，当RenderMode设置为System时会出现下面有条灰线，无法通过基本的设置属性除去；
+
+解决办法：
+
+只需要重绘一下toolstrip即可，C#源代码如下：
+
+//toolstrip重绘
+   private void toolStrip1_Paint(object sender, PaintEventArgs e)   
+    {   
+        if ((sender as ToolStrip).RenderMode == ToolStripRenderMode.System)   
+        {   
+            Rectangle rect = new Rectangle(0, 0, this.toolStrip1.Width, this.toolStrip1.Height-2);   
+            e.Graphics.SetClip(rect);   
+         }   
+    } 
+
+设置toolstrip的重绘事件为这个就OK了.....
+——————————————————————————————————————————————————

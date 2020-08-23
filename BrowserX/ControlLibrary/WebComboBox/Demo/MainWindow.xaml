@@ -1,0 +1,24 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Demo"
+        xmlns:WebComboBox="clr-namespace:WebComboBox;assembly=WebComboBox" x:Class="Demo.MainWindow"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+
+        <WebComboBox:WebComboBox x:Name="cboxWebAddressList" IsEditable="True" MaxDropDownHeight="768" FontFamily="微软雅黑" FontSize="13"  HorizontalAlignment="Left" Height="36" Margin="129,86,0,0" VerticalAlignment="Top" Width="368" DropDownArrow="Resources/arrow.png" DropDownClear="Resources/clearItem.png">
+            <ComboBoxItem Content="https://www.baidu.com/"/>
+            <ComboBoxItem Content="https://www.360.com/"/>
+            <ComboBoxItem Content="https://www.bing.com/"/>
+            <ComboBoxItem Content="https://www.qq.com/"/>
+        </WebComboBox:WebComboBox>
+        <ComboBox x:Name="cboxTest" Width="246" Height="32"  Template="{DynamicResource ComboBoxControlTemplate1}">
+            
+        </ComboBox>
+        <Button x:Name="btnGetText" Click="btnGetText_Click" Content="读取文本" HorizontalAlignment="Left" Height="36" Margin="497,86,0,0" VerticalAlignment="Top" Width="172"/>
+        <Button x:Name="btnAddText" Click="btnAddText_Click" Content="添加文本" HorizontalAlignment="Left" Height="36" Margin="497,126,0,0" VerticalAlignment="Top" Width="172"/>
+    </Grid>
+</Window>
